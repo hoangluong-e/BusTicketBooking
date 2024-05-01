@@ -1,13 +1,11 @@
-/* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable react/react-in-jsx-scope */
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Profile from '../screens/tabs/Profile';
-import Home from '../screens/tabs/Home';
+import Profile from '../screens/tabs/profile';
+import Home from '../screens/tabs/home';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import MyTicket from '../screens/tabs/Ticket';
-import Notification from '../screens/tabs/Notification';
-import {COLORS, SIZES} from '../containers/theme';
+import MyTicket from '../screens/tabs/ticket';
+import Notification from '../screens/tabs/notification';
+import {COLORS, SIZES} from '../constants/theme';
 
 const Tab = createBottomTabNavigator();
 
