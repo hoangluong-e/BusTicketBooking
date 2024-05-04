@@ -1,5 +1,5 @@
 import {FlatList, StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import PromotionCard from '../../../components/PromotionCard';
 
 const Promotions = () => {
@@ -40,7 +40,7 @@ const Promotions = () => {
   );
 };
 
-export default Promotions;
+export default memo(Promotions);
 
 const styles = StyleSheet.create({
   container: {

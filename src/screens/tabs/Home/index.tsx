@@ -7,22 +7,16 @@ import {
   Platform,
   StatusBar,
   NativeModules,
-  Button,
-  FlatList,
 } from 'react-native';
 import {COLORS, SIZES} from '../../../constants';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import Entypo from 'react-native-vector-icons/Entypo';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import CButton from '../../../components/Button';
 import PopularRoutes from './PopularRoutes';
 import Promotions from './Promotions';
+import SearchTicket from './SearchTicket';
 
 const {StatusBarManager} = NativeModules;
 
 function Home() {
-  const handlePress = () => {};
-
   return (
     <View style={styles.container}>
       <Image
@@ -33,45 +27,14 @@ function Home() {
         <View style={styles.body}>
           <View style={styles.row}>
             <Fontisto name="bus" size={SIZES.xxLarge} />
-            <Text style={styles.txt}>Hi, Hoang</Text>
+            <Text style={styles.txt_header}>Welcome</Text>
           </View>
           <View style={styles.txt_box}>
-            <Text style={styles.txt}>
+            <Text style={styles.txt_header}>
               Guarantee 150% refund if transport service is not provided
             </Text>
           </View>
-          <View style={styles.search}>
-            <View style={styles.row_search}>
-              <FontAwesome
-                style={styles.icon}
-                name="circle-o"
-                size={SIZES.xLarge}
-                color={COLORS.blue}
-              />
-              <Text style={styles.search_txt}>Start point</Text>
-            </View>
-            <View style={styles.line} />
-            <View style={styles.row_search}>
-              <FontAwesome
-                style={styles.icon}
-                name="circle-o"
-                size={SIZES.xLarge}
-                color={COLORS.red}
-              />
-              <Text style={styles.search_txt}>Where to?</Text>
-            </View>
-            <View style={styles.line} />
-            <View style={styles.row_search}>
-              <Entypo
-                style={styles.icon}
-                name="calendar"
-                size={SIZES.xLarge}
-                color={COLORS.primary}
-              />
-              <Text style={styles.search_txt}>Departure time</Text>
-            </View>
-          </View>
-          <CButton onPress={handlePress} title="Search" />
+          <SearchTicket />
           <View style={styles.box}>
             <Text style={styles.txt_title}>Popular bus routes</Text>
             <PopularRoutes />
@@ -104,10 +67,6 @@ const styles = StyleSheet.create({
     marginLeft: SIZES.medium,
     marginRight: SIZES.medium,
   },
-  search: {
-    borderRadius: 8,
-    backgroundColor: COLORS.white,
-  },
   row: {
     width: '100%',
     alignItems: 'center',
@@ -115,11 +74,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 20,
     marginTop: Platform.OS ? StatusBarManager.HEIGHT : StatusBar.currentHeight,
-  },
-  row_search: {
-    width: '100%',
-    alignItems: 'center',
-    flexDirection: 'row',
   },
   txt_box: {
     width: '85%',
@@ -131,28 +85,19 @@ const styles = StyleSheet.create({
     marginTop: SIZES.xLarge,
     marginBottom: SIZES.xLarge,
   },
-  line: {
-    marginLeft: SIZES.medium,
-    marginRight: SIZES.medium,
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.gray,
-  },
   txt: {
     fontWeight: 'bold',
     color: COLORS.black2,
+    fontSize: SIZES.small,
+  },
+  txt_header: {
+    fontWeight: 'bold',
+    color: COLORS.white,
     fontSize: SIZES.small,
   },
   txt_title: {
     fontWeight: 'bold',
     color: COLORS.black2,
     fontSize: SIZES.medium,
-  },
-  search_txt: {
-    color: COLORS.gray,
-    fontSize: SIZES.medium,
-    fontWeight: '500',
-  },
-  icon: {
-    padding: 12,
   },
 });

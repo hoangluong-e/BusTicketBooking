@@ -22,6 +22,7 @@ const MyTabs = () => {
         name="Home"
         component={Home}
         options={{
+          title: 'Home',
           tabBarIcon: ({color}) => (
             <Ionicons color={color} name="home-sharp" size={SIZES.large} />
           ),
@@ -31,6 +32,7 @@ const MyTabs = () => {
         name="My Ticket"
         component={MyTicket}
         options={{
+          title: 'My Ticket',
           tabBarIcon: ({color}) => (
             <Ionicons color={color} name="ticket-sharp" size={SIZES.large} />
           ),
@@ -40,6 +42,7 @@ const MyTabs = () => {
         name="Notification"
         component={Notification}
         options={{
+          title: 'Notification',
           tabBarIcon: ({color}) => (
             <Ionicons
               color={color}
@@ -53,6 +56,7 @@ const MyTabs = () => {
         name="Profile"
         component={Profile}
         options={{
+          title: 'Profile',
           tabBarIcon: ({color}) => (
             <FontAwesome color={color} name="user" size={SIZES.large} />
           ),

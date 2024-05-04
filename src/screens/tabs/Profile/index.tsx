@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   },
   header: {
     alignItems: 'center',
-    paddingTop: 36,
+    paddingTop: 44,
     marginTop: Platform.OS ? StatusBarManager.HEIGHT : StatusBar.currentHeight,
   },
   avatar: {
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     color: COLORS.black2,
   },
   button: {
-    marginTop: 52,
+    marginTop: 60,
   },
 });
 

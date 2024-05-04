@@ -1,5 +1,5 @@
 import {FlatList, Image, StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import RouteCard from '../../../components/RouteCard';
 
 const PopularRoutes = () => {
@@ -54,7 +54,7 @@ const PopularRoutes = () => {
   );
 };
 
-export default PopularRoutes;
+export default memo(PopularRoutes);
 
 const styles = StyleSheet.create({
   container: {
