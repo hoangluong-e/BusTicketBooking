@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {COLORS, SIZES} from '../../../constants';
 
-const NoNotificationsScreen = () => {
+const NotificationsScreen = () => {
   return (
     <View style={styles.container}>
       <Image
@@ -40,4 +40,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NoNotificationsScreen;
+export default NotificationsScreen;

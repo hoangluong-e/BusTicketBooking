@@ -66,7 +66,7 @@ export default Ticket;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    minWidth: 350,
+    minWidth: 290,
     marginTop: 16,
   },
   top: {

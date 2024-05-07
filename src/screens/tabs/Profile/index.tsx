@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   View,
   Text,
@@ -13,19 +13,22 @@ import {
 } from 'react-native';
 import {COLORS, SIZES} from '../../../constants';
 import CButton from '../../../components/Button';
+import {signOut} from 'firebase/auth';
+import {auth} from '../../../config/firebase';
+import {AuthContext} from '../../../contexts/authContext';
 
 const {StatusBarManager} = NativeModules;
 
 const ProfileScreen = () => {
-  const handleLogout = () => {
-    Alert.alert('Logout', 'Are you sure you want to log out?', [
-      {
-        text: 'Cancel',
-        onPress: () => console.log('Cancel Pressed'),
-        style: 'cancel',
-      },
-      {text: 'Yes', onPress: () => console.log('Logout Pressed')},
-    ]);
+  const {user, removeUser} = useContext(AuthContext);
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      removeUser();
+    } catch (error) {
+      console.error('An error occurred while signing out:', error);
+    }
   };
 
   const handleEditProfile = () => {};
@@ -39,7 +42,7 @@ const ProfileScreen = () => {
       <ScrollView style={styles.border}>
         <View style={styles.header}>
           <Image
-            source={require('../../../assets/images/2560px-Bus.svg.png')}
+            source={require('../../../assets/images/bus_icon.png')}
             style={styles.avatar}
           />
           <Text style={styles.name}>Luong Hoang</Text>
@@ -51,13 +54,13 @@ const ProfileScreen = () => {
             Location: Binh Duong, Viet Nam
           </Text>
           <View style={styles.line} />
-          <Text style={styles.userInfoText}>Phone: 0330 220 012</Text>
+          <Text style={styles.userInfoText}>Phone: 0330220012</Text>
           <View style={styles.line} />
-          <Text style={styles.userInfoText}>Birthday: January 1, 2002</Text>
+          <Text style={styles.userInfoText}>SignUp: January 1, 2002</Text>
         </View>
         <View style={styles.button}>
           <CButton onPress={handleEditProfile} title="Edit Profile" />
-          <CButton onPress={handleLogout} title="Log out" />
+          <CButton onPress={handleSignOut} title="Sign Out" />
         </View>
       </ScrollView>
     </View>

@@ -25,7 +25,11 @@ const SearchTicket = () => {
   ]);
 
   const handleSearchTicket = () => {
-    nav.navigate('ListSeats', {eventId: '123fkfdkfgjfgk'});
+    nav.navigate('ListSeats', {
+      startPoint: selectedStartPoint,
+      whereTo: selectedWhereTo,
+      date: selectedDate,
+    });
   };
 
   const formatDate = (date: Date) => {
