@@ -1,5 +1,4 @@
 import {
-  Image,
   StyleSheet,
   ScrollView,
   View,
@@ -8,15 +7,23 @@ import {
   StatusBar,
   Text,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
-import Ticket from '../../../components/Ticket';
 import {COLORS, SIZES} from '../../../constants';
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
+import useTicket from '../../../hooks/useTicket';
+import MyTicketCard from '../../../components/MyTicketCard';
 
 const {StatusBarManager} = NativeModules;
 
 function MyTicket() {
   const [activeTab, setActiveTab] = useState('upcoming');
+  const {data, isLoading} = useTicket();
+
+  const renderItem = useCallback(
+    ({item}: {item: MyTicketCard}) => <MyTicketCard {...item} />,
+    [],
+  );
 
   const handleUpcomingTab = () => {
     setActiveTab('upcoming');
@@ -34,19 +41,18 @@ function MyTicket() {
     switch (activeTab) {
       case 'upcoming':
         return (
-          <ScrollView showsVerticalScrollIndicator={false}>
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-          </ScrollView>
+          <FlatList
+            data={data}
+            showsVerticalScrollIndicator={false}
+            renderItem={renderItem}
+          />
         );
       case 'completed':
-        return <Text>Completed Content</Text>;
+        return <Text></Text>;
       case 'cancelled':
-        return <Text>Cancelled Content</Text>;
+        return <Text></Text>;
       default:
-        return <Text>Upcoming Content</Text>;
+        return <Text></Text>;
     }
   };
   return (

@@ -13,10 +13,12 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import PopularRoutes from './PopularRoutes';
 import Promotions from './Promotions';
 import SearchTicket from './SearchTicket';
+import setData from '../../../setData';
 
 const {StatusBarManager} = NativeModules;
 
 function Home() {
+  //setData();
   return (
     <View style={styles.container}>
       <Image

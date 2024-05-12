@@ -2,10 +2,8 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {COLORS, SIZES} from '../constants';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import {TouchableOpacity} from 'react-native';
 
-interface TicketCard {
-  id: string;
+interface MyTicketCard {
   startPoint: string;
   endPoint: string;
   price: string;
@@ -13,65 +11,54 @@ interface TicketCard {
   seat: string;
   date: string;
   seatBooked: string;
-  onPress: (
-    id: string,
-    seatBooked: string,
-    price: string,
-    time: string,
-  ) => void;
 }
 
-const TicketCard = (props: TicketCard) => {
-  const handlePress = () => {
-    props.onPress(props.id, props.seatBooked, props.price, props.time);
-  };
+const MyTicketCard = (props: MyTicketCard) => {
   return (
-    <TouchableOpacity onPress={handlePress}>
-      <View style={styles.container}>
-        <View style={styles.top}>
-          <Text style={styles.txt_top}>{props.startPoint}</Text>
-          <View style={styles.row}>
-            <SimpleLineIcons
-              color={COLORS.white}
-              name="arrow-right"
-              size={SIZES.small}
-            />
-            <SimpleLineIcons
-              color={COLORS.white}
-              name="arrow-right"
-              size={SIZES.medium}
-            />
-            <SimpleLineIcons
-              color={COLORS.white}
-              name="arrow-right"
-              size={SIZES.large}
-            />
-          </View>
-          <Text style={styles.txt_top}>{props.endPoint}</Text>
+    <View style={styles.container}>
+      <View style={styles.top}>
+        <Text style={styles.txt_top}>{props.startPoint}</Text>
+        <View style={styles.row}>
+          <SimpleLineIcons
+            color={COLORS.white}
+            name="arrow-right"
+            size={SIZES.small}
+          />
+          <SimpleLineIcons
+            color={COLORS.white}
+            name="arrow-right"
+            size={SIZES.medium}
+          />
+          <SimpleLineIcons
+            color={COLORS.white}
+            name="arrow-right"
+            size={SIZES.large}
+          />
         </View>
-        <View style={styles.mid}>
-          <View style={styles.mid_left}></View>
-          <View style={styles.mid_center}>
-            <View style={styles.line} />
-          </View>
-          <View style={styles.mid_right}></View>
+        <Text style={styles.txt_top}>{props.endPoint}</Text>
+      </View>
+      <View style={styles.mid}>
+        <View style={styles.mid_left}></View>
+        <View style={styles.mid_center}>
+          <View style={styles.line} />
         </View>
-        <View style={styles.bottom}>
-          <View style={styles.column_center}>
-            <Text style={styles.txt}>Time</Text>
-            <Text style={styles.txt}>{props.time}</Text>
-          </View>
-          <View style={styles.column_right}>
-            <Text style={styles.txt}>Price</Text>
-            <Text style={styles.txt}>{props.price}</Text>
-          </View>
+        <View style={styles.mid_right}></View>
+      </View>
+      <View style={styles.bottom}>
+        <View>
+          <Text style={styles.txt}>{props.date}</Text>
+          <Text style={styles.txt}>{props.time}</Text>
+        </View>
+        <View style={styles.column_right}>
+          <Text style={styles.txt}>{props.seatBooked}</Text>
+          <Text style={styles.txt}>{props.price}</Text>
         </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
-export default TicketCard;
+export default MyTicketCard;
 
 const styles = StyleSheet.create({
   container: {

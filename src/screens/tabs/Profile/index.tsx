@@ -5,22 +5,23 @@ import {
   Image,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
-  Alert,
   Platform,
   NativeModules,
   StatusBar,
+  ActivityIndicator,
 } from 'react-native';
 import {COLORS, SIZES} from '../../../constants';
 import CButton from '../../../components/Button';
 import {signOut} from 'firebase/auth';
 import {auth} from '../../../config/firebase';
 import {AuthContext} from '../../../contexts/authContext';
+import useUser from '../../../hooks/useUser';
 
 const {StatusBarManager} = NativeModules;
 
 const ProfileScreen = () => {
-  const {user, removeUser} = useContext(AuthContext);
+  const {removeUser} = useContext(AuthContext);
+  const {data, isLoading} = useUser();
 
   const handleSignOut = async () => {
     try {
@@ -33,6 +34,9 @@ const ProfileScreen = () => {
 
   const handleEditProfile = () => {};
 
+  if (isLoading) {
+    return <ActivityIndicator size="large" color="#0000ff" />;
+  }
   return (
     <View style={styles.container}>
       <Image
@@ -45,18 +49,20 @@ const ProfileScreen = () => {
             source={require('../../../assets/images/bus_icon.png')}
             style={styles.avatar}
           />
-          <Text style={styles.name}>Luong Hoang</Text>
+          <Text style={styles.name}>{data.name}</Text>
         </View>
         <View>
-          <Text style={styles.userInfoText}>Email: luonghoang@gmail.com</Text>
+          <Text style={styles.userInfoText}>Email: {data.email}</Text>
           <View style={styles.line} />
           <Text style={styles.userInfoText}>
-            Location: Binh Duong, Viet Nam
+            Location: {data.location || ''}
           </Text>
           <View style={styles.line} />
-          <Text style={styles.userInfoText}>Phone: 0330220012</Text>
+          <Text style={styles.userInfoText}>Phone: {data.phone}</Text>
           <View style={styles.line} />
-          <Text style={styles.userInfoText}>SignUp: January 1, 2002</Text>
+          <Text style={styles.userInfoText}>
+            SignUp: {data.signUpDate.slice(0, 10)}
+          </Text>
         </View>
         <View style={styles.button}>
           <CButton onPress={handleEditProfile} title="Edit Profile" />

@@ -22,6 +22,7 @@ const COLORS = {
   primary2: '#d6c3fb',
   gray: '#83829A',
   gray2: '#C1C0C8',
+  gray3: '#efeff1',
   offwhite: '#F3F4F8',
   white: '#FFFFFF',
   black: '#000000',

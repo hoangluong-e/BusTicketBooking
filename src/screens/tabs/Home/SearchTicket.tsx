@@ -1,4 +1,11 @@
-import {Modal, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {memo, useState} from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -8,6 +15,7 @@ import DateTimePicker, {
   DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
 import {useNavigator} from '../../../hooks/core/common';
+import useCity from '../../../hooks/useCity';
 
 const SearchTicket = () => {
   const nav = useNavigator();
@@ -18,14 +26,10 @@ const SearchTicket = () => {
   const [selectedDate, setSelectedDate] = useState('Departure time');
   const [selectedStartPoint, setSelectedStartPoint] = useState('Start point');
   const [selectedWhereTo, setSelectedWhereTo] = useState('Where to?');
-  const [cities] = useState([
-    {id: 1, name: 'City A'},
-    {id: 2, name: 'City B'},
-    {id: 3, name: 'City C'},
-  ]);
+  const {data, isLoading} = useCity();
 
   const handleSearchTicket = () => {
-    nav.navigate('ListSeats', {
+    nav.navigate('ListTickets', {
       startPoint: selectedStartPoint,
       whereTo: selectedWhereTo,
       date: selectedDate,
@@ -36,7 +40,7 @@ const SearchTicket = () => {
     const day = date.getDate().toString().padStart(2, '0');
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
+    return `${day}-${month}-${year}`;
   };
 
   const handleDateChange = (event: DateTimePickerEvent, selectedDate: any) => {
@@ -71,13 +75,19 @@ const SearchTicket = () => {
   };
 
   const renderCityList = () => {
-    return cities.map(city => (
-      <TouchableOpacity key={city.id} onPress={() => handleCitySelect(city)}>
-        <View style={styles.cityItem}>
-          <Text>{city.name}</Text>
-        </View>
-      </TouchableOpacity>
-    ));
+    if (isLoading) {
+      return <ActivityIndicator size="large" color={COLORS.gray} />;
+    } else if (data) {
+      return data.map(city => (
+        <TouchableOpacity key={city.id} onPress={() => handleCitySelect(city)}>
+          <View style={styles.cityItem}>
+            <Text>{city.name}</Text>
+          </View>
+        </TouchableOpacity>
+      ));
+    } else {
+      return <ActivityIndicator size="large" color={COLORS.gray} />;
+    }
   };
 
   const renderCityPicker = () => {

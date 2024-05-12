@@ -1,37 +1,22 @@
-import {FlatList, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, FlatList, StyleSheet, View} from 'react-native';
 import React, {memo} from 'react';
 import PromotionCard from '../../../components/PromotionCard';
+import usePromotion from '../../../hooks/usePromotion';
+import {COLORS} from '../../../constants';
 
 const Promotions = () => {
-  const routes = [
-    {
-      id: '1',
-      route:
-        'List of bus operators opened for sale on the occasion of April 30 - May 1',
-      imageUrl:
-        'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/03/30_4-la-ngay-gi-01.jpg',
-    },
-    {
-      id: '2',
-      route: 'Hot routes promotion up to 50%',
-      imageUrl:
-        'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/03/30_4-la-ngay-gi-01.jpg',
-    },
-    {
-      id: '3',
-      route: 'Get x2 discont when booking round trip bus tickets',
-      imageUrl:
-        'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/03/30_4-la-ngay-gi-01.jpg',
-    },
-  ];
+  const {data, isLoading} = usePromotion();
 
   const renderItem = ({item}: {item: PromotionCard}) => (
     <PromotionCard {...item} />
   );
+  if (isLoading) {
+    return <ActivityIndicator size="large" color={COLORS.gray} />;
+  }
   return (
     <View style={styles.container}>
       <FlatList
-        data={routes}
+        data={data}
         renderItem={renderItem}
         horizontal
         showsHorizontalScrollIndicator={false}

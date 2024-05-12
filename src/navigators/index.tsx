@@ -6,11 +6,15 @@ import AuthProvider, {AuthContext} from '../contexts/authContext';
 
 const Navigator = () => {
   const {user} = useContext(AuthContext);
-  console.log(user);
+  console.log('user: ', user);
 
   return (
     <NavigationContainer>
-      {user === undefined ? <AuthStack /> : <MyStack />}
+      {user === undefined || user.uid === undefined ? (
+        <AuthStack />
+      ) : (
+        <MyStack />
+      )}
     </NavigationContainer>
   );
 };

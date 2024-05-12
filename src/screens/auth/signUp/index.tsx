@@ -1,68 +1,20 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, StyleSheet, Image, TouchableOpacity, Text} from 'react-native';
 import {COLORS, SIZES} from '../../../constants';
 import CButton from '../../../components/Button';
 import {useNavigator} from '../../../hooks/core/common';
 import {TextInput} from 'react-native-gesture-handler';
-import {auth} from '../../../config/firebase';
-import {createUserWithEmailAndPassword} from 'firebase/auth';
-import {getDatabase, ref, child, set} from 'firebase/database';
+import useSignUp from '../../../hooks/useSignUp';
 
 const SignUp = () => {
   const nav = useNavigator();
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-
-  const onChangeEmail = (value: string) => {
-    setEmail(value);
-  };
-  const onChangeName = (value: string) => {
-    setName(value);
-  };
-
-  const onChangePhone = (value: string) => {
-    setPhone(value);
-  };
-
-  const onChangePassword = (value: string) => {
-    setPassword(value);
-  };
-
-  const createUser = async (
-    userId: any,
-    name: string,
-    email: string,
-    phone: string,
-  ) => {
-    const userData = {
-      name,
-      email,
-      phone,
-      signUpDate: new Date().toISOString(),
-    };
-    const dbRef = ref(getDatabase());
-    const childRef = child(dbRef, `users/${userId}`);
-    await set(childRef, userData);
-  };
-
-  const handleSignUp = async () => {
-    if (email && password) {
-      try {
-        const result = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password,
-        );
-        const uid = result.user.uid;
-        await createUser(uid, name, email, phone);
-        goBack();
-      } catch (err) {
-        console.log('error login', err);
-      }
-    }
-  };
+  const {
+    onChangeEmail,
+    onChangeName,
+    onChangePhone,
+    onChangePassword,
+    handleSignUp,
+  } = useSignUp();
 
   const goBack = () => {
     nav.goBack();

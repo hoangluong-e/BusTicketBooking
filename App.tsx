@@ -1,11 +1,15 @@
 import * as React from 'react';
 import Navigator from './src/navigators';
 import AuthProvider from './src/contexts/authContext';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
+const queryClient = new QueryClient();
 const App = () => {
   return (
     <AuthProvider>
-      <Navigator />
+      <QueryClientProvider client={queryClient}>
+        <Navigator />
+      </QueryClientProvider>
     </AuthProvider>
   );
 };

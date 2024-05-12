@@ -47,11 +47,11 @@ const styles = StyleSheet.create({
     width: '90%',
     padding: 8,
     fontSize: SIZES.medium,
-    fontWeight: '400',
+    fontWeight: '600',
   },
   txt_price: {
     padding: 8,
     fontSize: SIZES.small,
-    fontWeight: '400',
+    fontWeight: '500',
   },
 });
